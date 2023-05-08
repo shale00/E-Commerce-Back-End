@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const productTag = await Tag.findAll({
-      include: [{ model: Product }, { model: ProductTag }]
+      include: [{ model: Product }]
     });
     res.status(200).json(productTag);
   } catch (err) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const productTag = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product }, { model: ProductTag }]
+      include: [{ model: Product }]
     });
     if (!productTag) {
       res.status(400).json({ message: 'No tag with that id!'});
@@ -36,10 +36,11 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new tag
   try {
-    const productTag = await Tag.create({
-      id: req.body.id,
-      tag_name: req.body.tag_name
-    });
+    const productTag = await Tag.create(req.body);
+    // {
+    //   id: req.body.id,
+    //   tag_name: req.body.tag_name
+    // }
     res.status(200).json(productTag);
   } catch (err) {
     res.status(400).json(err);
@@ -49,11 +50,9 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  //TODO: check work
   try {
-    const tagName = await Tag.update(
+    const productTag = await Tag.update(
       {
-        id: req.body.id,
         tag_name: req.body.tag_name
       },
       {
@@ -61,11 +60,11 @@ router.put('/:id', async (req, res) => {
           id: req.params.id
         },
     });
-    if (!tagName) {
+    if (!productTag) {
       res.status(400).json({ message: 'No product found with this Tag ID' });
       return;
     }
-    res.status(200).json(tagName);
+    res.status(200).json(productTag);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -73,18 +72,17 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
-  //TODO: check work
   try {
-    const tagName = await Tag.destroy({
+    const productTag = await Tag.destroy({
       where: {
         id: req.params.id
       }
     });
-    if (!tagName) {
+    if (!productTag) {
       res.status(400).json({ message: 'No product found with this Tag ID' });
       return;
     }
-    res.status(200).json(tagName);
+    res.status(200).json(productTag);
   } catch (err) {
     res.status(500).json(err);
   }
