@@ -20,8 +20,7 @@ Product.init(
       allowNull: false,
     },
     price: {
-      //TODO: does DECIMAL need (parameters)
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       validate: {
         isDecimal: true,
@@ -40,8 +39,6 @@ Product.init(
       references: {
         model: 'category',
         key: 'id',
-        //TODO: should this be false??
-        unique: false
       }
     }
   },
