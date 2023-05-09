@@ -21,6 +21,8 @@
   After the depencies noted in the package.json file are installed, the user will need to source the schema.js and then run 'npm run seed' to seed the data into the database. The user can then Create, Read, Update, and Delete information in the database noted in the API route files. See the walkthrough video below:
 
 
+https://user-images.githubusercontent.com/123425315/236996931-36033d79-185f-4d84-bf83-955d93c8f8ce.mp4
+
 
   ## Credits
   The starter code for this app can be found here: https://github.com/coding-boot-camp/fantastic-umbrella
